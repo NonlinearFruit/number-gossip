@@ -1,5 +1,5 @@
 (* http://mathworld.wolfram.com/topics/SpecialNumbers.html *)
-max = 1000;
+max = 100;
 CalculateValues[n_] := Module[{current, previouses, index},
   index = 1;
   current = n[index];
@@ -37,6 +37,9 @@ PowerOf6[n_] := 6^n
 PowerOf7[n_] := 7^n
 PowerOf8[n_] := 8^n
 PowerOf9[n_] := 9^n
+Tetrahedral[n_] := Binomial[n+2, 3]
+Cubic[n_] := n^3
+Octohedral[n_] := 1/3 * n * (2 * n^2 + 1)
 
 functions = {
   Fibonacci, 
@@ -58,7 +61,11 @@ functions = {
   PowerOf6,
   PowerOf7,
   PowerOf8,
-  PowerOf9
+  PowerOf9,
+  Factorial,
+  Tetrahedral,
+  Cubic,
+  Octohedral
 }
 
 index = 0
