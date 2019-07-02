@@ -14,8 +14,7 @@ CalculateValues[n_] := Module[{current, previouses, index},
 
 ExportValues[function_] := Module[{values},
   values = CalculateValues[function];
-  Print[function];
-  Print[values];
+  Print["  "<>ToString[function]];
   Export[ToString[function]<>".txt", values]
 ]
 
@@ -62,4 +61,13 @@ functions = {
   PowerOf9
 }
 
-Do[ ExportValues[function], {function, functions}]
+index = 0
+numberOfFunctions = Length[functions]
+ExportValuesWithProgress[function_] :=  Module[{},
+  index++;
+  Print["Start: "<>ToString[index]<>"/"<>ToString[numberOfFunctions]];
+  ExportValues[function];
+  Print["  Finished"];
+]
+
+Do[ExportValuesWithProgress[function], {function, functions}]
