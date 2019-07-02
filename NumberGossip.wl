@@ -13,8 +13,8 @@ CalculateValues[n_] := Module[{current, previouses, index},
 ]
 
 ExportValues[function_] := Module[{values},
-  values = CalculateValues[function];
   Print["  "<>ToString[function]];
+  values = CalculateValues[function];
   Export[ToString[function]<>".txt", values]
 ]
 
