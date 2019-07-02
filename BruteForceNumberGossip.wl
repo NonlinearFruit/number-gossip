@@ -6,10 +6,12 @@ ExportValues[function_] := Module[{values},
   Export[ToString[function]<>".txt", values]
 ]
 
-Abundant[n_] := Select[Range[n], DivisorSigma[1, #] > 2 # &]
+Abundant[n_] := Select[Range[n], DivisorSigma[1, #] > 2 # &] (* A005101 *)
+Deficient[n_] := Select[Range[n], DivisorSigma[1, # ] < 2*# &] (* A005100 *)
 
 functions = {
-  Abundant
+  Abundant,
+  Deficient
 }
 
 index = 0

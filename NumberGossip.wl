@@ -1,5 +1,5 @@
 (* http://mathworld.wolfram.com/topics/SpecialNumbers.html *)
-max = 100;
+max = 100000;
 CalculateValues[n_] := Module[{current, previouses, index},
   index = 1;
   current = n[index];
