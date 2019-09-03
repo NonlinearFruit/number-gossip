@@ -25,18 +25,19 @@ Cubic[n_] := n^3
 Octohedral[n_] := 1/3 * n * (2 * n^2 + 1)
 
 functions = {
-  Fibonacci, 
-  Perfect, 
-  Triangular, 
-  Square, 
-  Pentagonal, 
-  ColossallyAbundantNumber, 
-  Lucas,
-  PiPrime,
-  PhiPrime,
-  ePrime,
+  CatalanNumber,
+  ColossallyAbundantNumber,
+  Cubic,
   Even,
+  Factorial,
+  Fibonacci,
+  Lucas,
+  Octohedral,
   Odd,
+  Pentagonal,
+  Perfect,
+  PhiPrime,
+  PiPrime,
   PowerOf2,
   PowerOf3,
   PowerOf4,
@@ -45,10 +46,11 @@ functions = {
   PowerOf7,
   PowerOf8,
   PowerOf9,
-  Factorial,
+  Prime,
+  Square,
   Tetrahedral,
-  Cubic,
-  Octohedral
+  Triangular, 
+  ePrime
 }
 
 max = 100000;
