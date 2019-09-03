@@ -1,22 +1,5 @@
+#!/usr/bin/env wolframscript
 (* http://mathworld.wolfram.com/topics/SpecialNumbers.html *)
-max = 100000;
-CalculateValues[n_] := Module[{current, previouses, index},
-  index = 1;
-  current = n[index];
-  previouses = List[];
-  While[current <= max,
-    AppendTo[previouses, current];
-    index++;
-    current = n[index];
-  ];
-  previouses
-]
-
-ExportValues[function_] := Module[{values},
-  Print["  "<>ToString[function]];
-  values = CalculateValues[function];
-  Export[ToString[function]<>".txt", values]
-]
 
 Triangular[n_] := PolygonalNumber[3,n]
 Square[n_] := PolygonalNumber[4,n]
@@ -68,13 +51,33 @@ functions = {
   Octohedral
 }
 
+max = 100000;
+store = Association[{}];
+Do[AppendTo[store, i -> ""], {i, max}];
+CalculateValues[n_] := Module[{current, previouses, index},
+  index = 1;
+  previous = -1;
+  current = n[index];
+  While[current <= max,
+    If[current != previous,
+      AppendTo[store, current -> StringTrim[StringJoin[store[current]," " <> ToString[n]]]];
+    ];
+    index++;
+    previous = current;
+    current = n[index];
+  ];
+]
+
 index = 0
 numberOfFunctions = Length[functions]
-ExportValuesWithProgress[function_] :=  Module[{},
+CalculateValuesWithProgress[function_] :=  Module[{},
   index++;
   Print["Start: "<>ToString[index]<>"/"<>ToString[numberOfFunctions]];
-  ExportValues[function];
+  CalculateValues[function];
   Print["  Finished"];
 ]
 
-Do[ExportValuesWithProgress[function], {function, functions}]
+Do[CalculateValuesWithProgress[function], {function, functions}]
+file = OpenWrite["numbergossip.txt"];
+Do[WriteLine[file, store[i]], {i, max}];
+Close[file];
