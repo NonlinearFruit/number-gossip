@@ -4,7 +4,7 @@
 Triangular[n_] := PolygonalNumber[3,n]
 Square[n_] := PolygonalNumber[4,n]
 Pentagonal[n_] := PolygonalNumber[5,n]
-ColossallyAbundantNumber[n_] := {2, 6, 12, 60, 120, 360, 2520, 5040, 55440, 720720, 1441440}[[n]] (* OEIS A004490 *)
+ColossallyAbundant[n_] := {2, 6, 12, 60, 120, 360, 2520, 5040, 55440, 720720, 1441440}[[n]] (* OEIS A004490 *)
 Perfect[n_] := PerfectNumber[n]
 Lucas[n_] := LucasL[n]
 PiPrime[n_] := {3, 31, 314159}[[n]] (* OEIS A005042 *)
@@ -23,14 +23,18 @@ PowerOf9[n_] := 9^n
 Tetrahedral[n_] := Binomial[n+2, 3]
 Cubic[n_] := n^3
 Octohedral[n_] := 1/3 * n * (2 * n^2 + 1)
+LazyCaterer[n_] := PolygonalNumber[3,n] + 1 (* OEIS A000124 *)
+Cake[n_] := Binomial[n, 3] + Binomial[n, 2] + Binomial[n, 1] + Binomial[n, 0] (* OEIS A000125 *)
 
 functions = {
+  Cake,
   CatalanNumber,
-  ColossallyAbundantNumber,
+  ColossallyAbundant,
   Cubic,
   Even,
   Factorial,
   Fibonacci,
+  LazyCaterer,
   Lucas,
   Octohedral,
   Odd,
