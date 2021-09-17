@@ -26,7 +26,7 @@ Octohedral[n_] := 1/3 * n * (2 * n^2 + 1)
 LazyCaterer[n_] := PolygonalNumber[3,n] + 1 (* OEIS A000124 *)
 Cake[n_] := Binomial[n, 3] + Binomial[n, 2] + Binomial[n, 1] + Binomial[n, 0] (* OEIS A000125 *)
 
-functions = {
+generatingFunctions = {
   Cake,
   CatalanNumber,
   ColossallyAbundant,
@@ -60,30 +60,30 @@ functions = {
 max = 100000;
 store = Association[{}];
 Do[AppendTo[store, i -> ""], {i, max}];
-CalculateValues[n_] := Module[{current, previouses, index},
+CalculateValues[generatingFunction_] := Module[{current, previouses, index},
   index = 1;
   previous = -1;
-  current = n[index];
+  current = generatingFunction[index];
   While[current <= max,
     If[current != previous,
-      AppendTo[store, current -> StringTrim[StringJoin[store[current]," " <> ToString[n]]]];
+      AppendTo[store, current -> StringTrim[StringJoin[store[current]," " <> ToString[generatingFunction]]]];
     ];
     index++;
     previous = current;
-    current = n[index];
+    current = generatingFunction[index];
   ];
 ]
 
 index = 0
-numberOfFunctions = Length[functions]
-CalculateValuesWithProgress[function_] :=  Module[{},
+numberOfFunctions = Length[generatingFunctions]
+CalculateValuesWithProgress[generatingFunction_] :=  Module[{},
   index++;
-  Print["Start: "<>ToString[index]<>"/"<>ToString[numberOfFunctions]];
-  CalculateValues[function];
+  Print["Start: "<>ToString[index]<>"/"<>ToString[numberOfFunctions]<>" :: "<>ToString[generatingFunction]];
+  CalculateValues[generatingFunction];
   Print["  Finished"];
 ]
 
-Do[CalculateValuesWithProgress[function], {function, functions}]
+Do[CalculateValuesWithProgress[generatingFunction], {generatingFunction, generatingFunctions}]
 file = OpenWrite["numbergossip.txt"];
 Do[WriteLine[file, store[i]], {i, max}];
 Close[file];
