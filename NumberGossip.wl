@@ -1,5 +1,6 @@
 #!/usr/bin/env wolframscript
 (* http://mathworld.wolfram.com/topics/SpecialNumbers.html *)
+max = 100000;
 
 Triangular[n_] := PolygonalNumber[3,n]
 Square[n_] := PolygonalNumber[4,n]
@@ -57,7 +58,23 @@ generatingFunctions = {
   ePrime
 }
 
-max = 100000;
+AbundantValues = Select[Range[max], DivisorSigma[1, #] > 2 # &]
+Abundant[n_] := If[ n <= Length[AbundantValues], AbundantValues[[n]], max+1 ] (* OEIS A005101 *)
+
+DeficientValues = Select[Range[max], DivisorSigma[1, # ] < 2*# &]
+Deficient[n_] := If[ n <= Length[DeficientValues], DeficientValues[[n]], max+1 ] (* OEIS A005100 *)
+
+PracticalQ[n_] := Module[{f, p, e, prod=1, ok=True}, If[n<1 || (n>1 && OddQ[n]), False, If[n==1, True, f=FactorInteger[n]; {p, e} = Transpose[f]; Do[If[p[[i]] > 1+DivisorSigma[1, prod], ok=False; Break[]]; prod=prod*p[[i]]^e[[i]], {i, Length[p]}]; ok]]]; (* T. D. Noe, Apr 02 2010 *)
+PracticalValues = Select[Range[max], PracticalQ[#] &]
+Practical[n_] := If[ n <= Length[PracticalValues], PracticalValues[[n]], max+1 ] (* OEIS A005153 *)
+
+bulkFunctions = {
+  Abundant,
+  Deficient,
+  Practical
+}
+Do[AppendTo[generatingFunctions, bulkFunction], {bulkFunction, bulkFunctions}];
+
 store = Association[{}];
 Do[AppendTo[store, i -> ""], {i, max}];
 CalculateValues[generatingFunction_] := Module[{current, previouses, index},
