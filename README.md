@@ -2,34 +2,38 @@
 
 This project generates a number property database. For example, 1 is:
 
- - CatalanNumber 
- - Cubic 
- - Factorial 
- - Fibonacci 
- - Lucas 
- - Octohedral 
- - Odd 
- - Pentagonal 
- - Square 
- - Tetrahedral 
+ - CatalanNumber
+ - Cubic
+ - Factorial
+ - Fibonacci
+ - Lucas
+ - MagicSquare
+ - Octohedral
+ - Pentagonal
+ - Square
+ - Tetrahedral
  - Triangular
+ - BusyBeaver
+ - Deficient
+ - Palindrome
+ - Practical
 
 The resulting database is in the form of a text file. Where line #1 has a space separated list of properties for the number 1. Here is an example for the numbers 1 through 10:
 
 ```
-CatalanNumber Cubic Factorial Fibonacci Lucas Octohedral Odd Pentagonal Square Tetrahedral Triangular
-CatalanNumber ColossallyAbundantNumber Even Factorial Fibonacci PowerOf2 Prime ePrime
-Fibonacci Lucas Odd PiPrime PowerOf3 Prime Triangular
-Even Lucas PowerOf2 PowerOf4 Square Tetrahedral
-CatalanNumber Fibonacci Odd Pentagonal PowerOf5 Prime
-ColossallyAbundantNumber Even Factorial Octohedral Perfect PowerOf6 Triangular
-Lucas Odd PowerOf7 Prime
-Cubic Even Fibonacci PowerOf2 PowerOf8
-Odd PowerOf3 PowerOf9 Square
-Even Tetrahedral Triangular
+CatalanNumber Cubic Factorial Fibonacci Lucas MagicSquare Octohedral Pentagonal Square Tetrahedral Triangular BusyBeaver Deficient Palindrome Practical
+Cake CatalanNumber ColossallyAbundant Factorial Fibonacci LazyCaterer PowerOf2 Prime ePrime Deficient Palindrome Practical
+Fibonacci Lucas PiPrime PowerOf3 Prime Triangular Deficient Palindrome
+Cake LazyCaterer Lucas PowerOf2 PowerOf4 Square Tetrahedral Deficient Palindrome Practical
+CatalanNumber Fibonacci MagicSquare Pentagonal PowerOf5 Prime Deficient Palindrome
+ColossallyAbundant Factorial Octohedral Perfect PowerOf6 Triangular BusyBeaver Palindrome Practical
+LazyCaterer Lucas PowerOf7 Prime Deficient Palindrome
+Cake Cubic Fibonacci PowerOf2 PowerOf8 Deficient Palindrome Practical
+PowerOf3 PowerOf9 Square Deficient Palindrome
+Tetrahedral Triangular Deficient
 ```
 
-There are currently 26 properties that are populated and by default the script calculates only for 1 through 100k.
+There are currently 30 properties that are populated and by default the script calculates only for 1 through 100k.
 
 ## Install
 
