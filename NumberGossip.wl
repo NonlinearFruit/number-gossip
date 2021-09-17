@@ -26,6 +26,7 @@ Cubic[n_] := n^3
 Octohedral[n_] := 1/3 * n * (2 * n^2 + 1)
 LazyCaterer[n_] := PolygonalNumber[3,n] + 1 (* OEIS A000124 *)
 Cake[n_] := Binomial[n, 3] + Binomial[n, 2] + Binomial[n, 1] + Binomial[n, 0] (* OEIS A000125 *)
+MagicSquare[n_] := n * (n^2 + 1)/2 (* OEIS A006003 *)
 
 generatingFunctions = {
   Cake,
@@ -37,6 +38,7 @@ generatingFunctions = {
   Fibonacci,
   LazyCaterer,
   Lucas,
+  MagicSquare,
   Octohedral,
   Odd,
   Pentagonal,
@@ -68,8 +70,12 @@ PracticalQ[n_] := Module[{f, p, e, prod=1, ok=True}, If[n<1 || (n>1 && OddQ[n]),
 PracticalValues = Select[Range[max], PracticalQ[#] &]
 Practical[n_] := If[ n <= Length[PracticalValues], PracticalValues[[n]], max+1 ] (* OEIS A005153 *)
 
+BusyBeaverValues = {1, 6, 21, 107}
+BusyBeaver[n_] := If[ n <= Length[BusyBeaverValues], BusyBeaverValues[[n]], max+1 ] (* OEIS A060843 *)
+
 bulkFunctions = {
   Abundant,
+  BusyBeaver,
   Deficient,
   Practical
 }
