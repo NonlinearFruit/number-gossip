@@ -11,8 +11,6 @@ Lucas[n_] := LucasL[n]
 PiPrime[n_] := {3, 31, 314159}[[n]] (* OEIS A005042 *)
 ePrime[n_] := {2, 271, 2718281}[[n]] (* OEIS A007512 *)
 PhiPrime[n_] := {1618033, 1618033988749}[[n]] (* OEIS A064117 *)
-Even[n_] := n*2
-Odd[n_] := n*2 - 1
 PowerOf2[n_] := 2^n
 PowerOf3[n_] := 3^n
 PowerOf4[n_] := 4^n
@@ -33,14 +31,12 @@ generatingFunctions = {
   CatalanNumber,
   ColossallyAbundant,
   Cubic,
-  Even,
   Factorial,
   Fibonacci,
   LazyCaterer,
   Lucas,
   MagicSquare,
   Octohedral,
-  Odd,
   Pentagonal,
   Perfect,
   PhiPrime,
