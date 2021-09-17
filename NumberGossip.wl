@@ -73,10 +73,14 @@ Practical[n_] := If[ n <= Length[PracticalValues], PracticalValues[[n]], max+1 ]
 BusyBeaverValues = {1, 6, 21, 107}
 BusyBeaver[n_] := If[ n <= Length[BusyBeaverValues], BusyBeaverValues[[n]], max+1 ] (* OEIS A060843 *)
 
+PalindromeValues = Select[Range[max], PalindromeQ[#] &]
+Palindrome[n_] := If[ n <= Length[PalindromeValues], PalindromeValues[[n]], max+1 ]
+
 bulkFunctions = {
   Abundant,
   BusyBeaver,
   Deficient,
+  Palindrome,
   Practical
 }
 Do[AppendTo[generatingFunctions, bulkFunction], {bulkFunction, bulkFunctions}];
