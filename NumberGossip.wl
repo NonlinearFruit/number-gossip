@@ -72,9 +72,18 @@ BusyBeaver[n_] := If[ n <= Length[BusyBeaverValues], BusyBeaverValues[[n]], max+
 PalindromeValues = Select[Range[max], PalindromeQ[#] &]
 Palindrome[n_] := If[ n <= Length[PalindromeValues], PalindromeValues[[n]], max+1 ]
 
+CarmichaelValues = Cases[Range[1, max, 2], n_ /; Mod[n, CarmichaelLambda[n]] == 1 && ! PrimeQ[n]]
+Carmichael[n_] := If[ n <= Length[CarmichaelValues], CarmichaelValues[[n]], max+1 ] (* OEIS A002997 *)
+
+AmicableQ[n_] := If[Nest[s, n, 2] == n && ! DivisorSigma[1, n] - n == n, True, False] (* Ant King, Jan 02 2007 *)
+AmicableValues = Select[Range[max], AmicableNumberQ[ # ] &]
+Amicable[n_] := If[ n <= Length[AmicableValues], AmicableValues[[n]], max+1 ] (* OEIS A063990 *)
+
 bulkFunctions = {
   Abundant,
+  Amicable,
   BusyBeaver,
+  Carmichael,
   Deficient,
   Palindrome,
   Practical

@@ -33,7 +33,7 @@ PowerOf3 PowerOf9 Square Deficient Palindrome
 Tetrahedral Triangular Deficient
 ```
 
-There are currently 30 properties that are populated and by default the script calculates only for 1 through 100k.
+There are currently 31 properties that are populated and by default the script calculates only for 1 through 100k.
 
 ## Install
 
