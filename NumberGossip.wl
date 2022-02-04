@@ -76,7 +76,7 @@ CarmichaelValues = Cases[Range[1, max, 2], n_ /; Mod[n, CarmichaelLambda[n]] == 
 Carmichael[n_] := If[ n <= Length[CarmichaelValues], CarmichaelValues[[n]], max+1 ] (* OEIS A002997 *)
 
 AmicableQ[n_] := If[Nest[s, n, 2] == n && ! DivisorSigma[1, n] - n == n, True, False] (* Ant King, Jan 02 2007 *)
-AmicableValues = Select[Range[max], AmicableNumberQ[ # ] &]
+AmicableValues = Select[Range[max], AmicableQ[ # ] &]
 Amicable[n_] := If[ n <= Length[AmicableValues], AmicableValues[[n]], max+1 ] (* OEIS A063990 *)
 
 bulkFunctions = {
