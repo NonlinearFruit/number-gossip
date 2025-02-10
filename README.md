@@ -41,6 +41,18 @@ There are currently 31 properties that are populated and by default the script c
 - Clone this repo
 - [Bonus] Add number gossip [script][script] to your path (with proper path to database)
 
+### Via Podman
+
+```
+podman pull docker.io/wolframresearch/wolframengine:latest # docs <https://hub.docker.com/r/wolframresearch/wolframengine>
+podman run -it wolframresearch/wolframengine
+# login
+$PasswordFile # Note the path for the next podman command
+$PasswordFile // FilePrint # Save output to ./mathpass locally
+podman run --rm -v .:/home/wolframengine/.WolframEngine/Licensing:z -v .:/home/wolframengine/number-gossip:z -w /home/wolframengine/number-gossip -u root wolframresearch/wolframengine wolframscript NumberGossip.wl
+cp numbergossip.txt ~/scripts/numbergossip.txt
+```
+
 ## Generate the Database
 
 To run the script and generate the output file, try:
