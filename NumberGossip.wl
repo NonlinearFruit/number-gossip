@@ -66,7 +66,7 @@ PracticalQ[n_] := Module[{f, p, e, prod=1, ok=True}, If[n<1 || (n>1 && OddQ[n]),
 PracticalValues = Select[Range[max], PracticalQ[#] &]
 Practical[n_] := If[ n <= Length[PracticalValues], PracticalValues[[n]], max+1 ] (* OEIS A005153 *)
 
-BusyBeaverValues = {1, 6, 21, 107}
+BusyBeaverValues = {1, 6, 21, 107, 47176870}
 BusyBeaver[n_] := If[ n <= Length[BusyBeaverValues], BusyBeaverValues[[n]], max+1 ] (* OEIS A060843 *)
 
 PalindromeValues = Select[Range[max], PalindromeQ[#] &]
