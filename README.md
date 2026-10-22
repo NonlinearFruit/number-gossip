@@ -43,14 +43,42 @@ There are currently 31 properties that are populated and by default the script c
 
 ### Via Podman
 
+Uses the [official Wolfram Engine image](https://hub.docker.com/r/wolframresearch/wolframengine).
+
+#### Activate (one time)
+
+The Wolfram Engine needs a [free developer license](https://www.wolfram.com/engine/). Store it in a named volume:
+
 ```
-podman pull docker.io/wolframresearch/wolframengine:latest # docs <https://hub.docker.com/r/wolframresearch/wolframengine>
-podman run -it wolframresearch/wolframengine
-# login
-$PasswordFile # Note the path for the next podman command
-$PasswordFile // FilePrint # Save output to ./mathpass locally
-podman run --rm -v .:/home/wolframengine/.WolframEngine/Licensing:z -v .:/home/wolframengine/number-gossip:z -w /home/wolframengine/number-gossip -u root wolframresearch/wolframengine wolframscript NumberGossip.wl
-cp numbergossip.txt ~/scripts/numbergossip.txt
+podman volume create wolfram-license
+
+podman run --rm -it \
+  -v wolfram-license:/home/wolframengine/.WolframEngine/Licensing \
+  docker.io/wolframresearch/wolframengine
+```
+
+Enter your Wolfram ID and password at the prompt, then `Quit`.
+
+#### Run
+
+```
+podman run --rm -it \
+  --user=root \
+  -v wolfram-license:/root/.WolframEngine/Licensing \
+  -v .:/work \
+  -w /work \
+  docker.io/wolframresearch/wolframengine \
+  wolframscript -file NumberGossip.wl
+```
+
+The output is `./numbergossip.txt`.
+
+#### Clean Up
+
+Remove the license volume (you will need to activate again next time):
+```
+podman volume rm wolfram-license
+podman rmi docker.io/wolframresearch/wolframengine
 ```
 
 ## Generate the Database

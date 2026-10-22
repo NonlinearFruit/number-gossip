@@ -90,32 +90,24 @@ bulkFunctions = {
 }
 Do[AppendTo[generatingFunctions, bulkFunction], {bulkFunction, bulkFunctions}];
 
-store = Association[{}];
-Do[AppendTo[store, i -> ""], {i, max}];
-CalculateValues[generatingFunction_] := Module[{current, previouses, index},
+store = ConstantArray["", max + 1];
+CalculateValues[generatingFunction_] := Module[{current, index},
   index = 1;
-  previous = -1;
   current = generatingFunction[index];
   While[current <= max,
-    If[current != previous,
-      AppendTo[store, current -> StringTrim[StringJoin[store[current]," " <> ToString[generatingFunction]]]];
-    ];
+    store[[current]] = StringTrim[store[[current]] <> " " <> ToString[generatingFunction]];
     index++;
-    previous = current;
     current = generatingFunction[index];
   ];
 ]
 
-index = 0
 numberOfFunctions = Length[generatingFunctions]
-CalculateValuesWithProgress[generatingFunction_] :=  Module[{},
-  index++;
-  Print["Start: "<>ToString[index]<>"/"<>ToString[numberOfFunctions]<>" :: "<>ToString[generatingFunction]];
-  CalculateValues[generatingFunction];
+Do[
+  Print["Start: "<>ToString[i]<>"/"<>ToString[numberOfFunctions]<>" :: "<>ToString[func]];
+  CalculateValues[func];
   Print["  Finished"];
-]
+, {i, 1, numberOfFunctions}, {func, {generatingFunctions[[i]]}}]
 
-Do[CalculateValuesWithProgress[generatingFunction], {generatingFunction, generatingFunctions}]
 file = OpenWrite["numbergossip.txt"];
-Do[WriteLine[file, store[i]], {i, max}];
+Do[WriteLine[file, store[[i]]], {i, max}];
 Close[file];
